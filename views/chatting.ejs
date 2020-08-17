@@ -82,6 +82,7 @@ $(document).ready(function(){
 
     // 서버로부터의 메시지가 수신되면
     socket.on("chat", function(data) {
+      console.log(data);
       $("#chatLogs").append("<div>" + data.msg + " : from <strong>" + data.from.name + "</strong></div>");
     });
 

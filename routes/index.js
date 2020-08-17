@@ -4,10 +4,7 @@ const JSONResponse  = dicontainer.get( "JSONResponse" );
 const DB              = dicontainer.get( "DB" );
 const pathUtil        = dicontainer.get( "pathUtil" );
 const module_path     = pathUtil.basename( __filename );
-var path = require('path');
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
-var port = process.env.PORT || 3000;
+
 
 
 /* GET home page. */

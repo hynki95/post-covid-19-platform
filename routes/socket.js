@@ -31,13 +31,13 @@ io.on('connection', function(socket) {
       socket.broadcast.emit('chat', msg);
   
       // 메시지를 전송한 클라이언트에게만 메시지를 전송한다
-      // socket.emit('s2c chat', msg);
+      socket.emit('chat', msg);
   
       // 접속된 모든 클라이언트에게 메시지를 전송한다
-      // io.emit('s2c chat', msg);
+    //   io.emit('chat', msg);
   
       // 특정 클라이언트에게만 메시지를 전송한다
-      // io.to(id).emit('s2c chat', data);
+    //   io.to(id).emit('s2c chat', data);
     });
   
     // force client disconnect from server
