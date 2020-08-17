@@ -3,7 +3,11 @@ const router = express.Router();
 const JSONResponse  = dicontainer.get( "JSONResponse" );
 const DB              = dicontainer.get( "DB" );
 const pathUtil        = dicontainer.get( "pathUtil" );
-const module_path     = pathUtil.basename( __filename )
+const module_path     = pathUtil.basename( __filename );
+var path = require('path');
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+var port = process.env.PORT || 3000;
 
 
 /* GET home page. */
@@ -16,15 +20,9 @@ router.get('/', JSONResponse.isLoggedin, async function(req, res, next) {
   res.render('index', { title: '제목'} );
 });
 
-router.get('/chargeKPAY', JSONResponse.isLoggedin, async function(req, res, next) {
+router.get('/chatting', JSONResponse.isLoggedin, async function(req, res, next) {
   let userid = req.user.userid;
-  let sql = 'SELECT /* ?.getBalanceofKpay */ K_pay, UZ_pay FROM tb_user WHERE user_id = ? ';
-  let getBalanceContent = await DB.Sql( sql, [ module_path, userid])
-  console.log(getBalanceContent);
-  console.log(getBalanceContent[0].K_pay)
-  console.log(getBalanceContent[0].UZ_pay)
-  console.log("sql : " + sql);
-  res.render('chargeKPAY', { title: 'Charge KPAY' , K_pay : getBalanceContent[0].K_pay.toLocaleString()});
+  res.render('chatting', { title: 'Chatting', userid : userid});
 });
 
 router.get('/chargeUZPAY', JSONResponse.isLoggedin, async function(req, res, next) {
