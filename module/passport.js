@@ -26,7 +26,8 @@ module.exports = function(passport) {
 
         var query = `SELECT /* ?.loginprocess */
                             user_id,
-                            password
+                            password,
+                            salt_pass
                             
                         FROM tb_user
                         WHERE user_id = ? `;
@@ -78,7 +79,6 @@ module.exports = function(passport) {
             return done(null, false, req.flash('error', '중복된 이메일입니다.'));
         }else{
             console.log('성공')
-            let withdrawpassword = req.body.withdraw_password;
             let userrealnameField = req.body.user_name;
             var sql = `INSERT INTO /* ?.joinprocess */ tb_user(user_id, password, salt_pass, userrealnameField) VALUE (?,?,?,?)`;
             console.log(userid, hashpass, salt)

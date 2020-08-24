@@ -30,7 +30,7 @@
     <section class="content">
       <div class="container-fluid">
 
-        <div class="row" id="charge_menu">
+        <!-- <div class="row" id="charge_menu">
           <div class="container">
             <h3>Socket.io Chat Example</h3>
             <form class="form-inline">
@@ -42,9 +42,40 @@
             </form>
             <div id="chatLogs"></div>
           </div>
+        </div> -->
+
+        <div class="row" id="charge_menu">
+          <div class="container">
+            <h3>Socket.io Chat Example</h3>
+            <!-- <form class="form-inline"> -->
+            <form class="form-horizontal" id="chat">
+              <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="room" class="col-sm-2 control-label">Room</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="room" name="room" placeholder="Room">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="msg" class="col-sm-2 control-label">Message</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="msg" name="msg" placeholder="Message">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default">Send</button>
+                </div>
+              </div>
+            </form>
+            <ul id="chat"></ul>
+          </div>
         </div>
-
-
       </div>
       <!-- /.card-body -->
     </section>
@@ -64,47 +95,67 @@
 
 <script>
 $(document).ready(function(){
-  $(function(){
-    // socket.io 서버에 접속한다
-    var socket = io();
+    // // socket.io 서버에 접속한다
+    // // var socket = io();
+    // // 지정 namespace로 접속한다
+    // var socket = io('/my-namespace');
 
-    // 서버로 자신의 정보를 전송한다.
-    socket.emit("login", {
-      // name: "ungmo2",
-      name: makeRandomName(),
-      userid: "ungmo2@gmail.com"
-    });
+    // // 서버로 자신의 정보를 전송한다.
+    // socket.emit("login", {
+    //   // name: "ungmo2",
+    //   name: makeRandomName(),
+    //   userid: "ungmo2@gmail.com"
+    // });
 
-    // 서버로부터의 메시지가 수신되면
-    socket.on("login", function(data) {
-      $("#chatLogs").append("<div><strong>" + data + "</strong> has joined</div>");
-    });
+    // // 서버로부터의 메시지가 수신되면
+    // socket.on("login", function(data) {
+    //   $("#chatLogs").append("<div><strong>" + data + "</strong> has joined</div>");
+    // });
 
-    // 서버로부터의 메시지가 수신되면
-    socket.on("chat", function(data) {
-      console.log(data);
-      $("#chatLogs").append("<div>" + data.msg + " : from <strong>" + data.from.name + "</strong></div>");
-    });
+    // // 서버로부터의 메시지가 수신되면
+    // socket.on("chat", function(data) {
+    //   console.log(data);
+    //   $("#chatLogs").append("<div>" + data.msg + " : from <strong>" + data.from.name + "</strong></div>");
+    // });
 
-    // Send 버튼이 클릭되면
-    $("form").submit(function(e) {
-      e.preventDefault();
-      var $msgForm = $("#msgForm");
+    // // Send 버튼이 클릭되면
+    // $("form").submit(function(e) {
+    //   e.preventDefault();
+    //   var $msgForm = $("#msgForm");
 
-      // 서버로 메시지를 전송한다.
-      socket.emit("chat", { msg: $msgForm.val() });
-      $msgForm.val("");
-    });
+    //   // 서버로 메시지를 전송한다.
+    //   socket.emit("chat", { msg: $msgForm.val() });
+    //   $msgForm.val("");
+    // });
 
-    function makeRandomName(){
-      var name = "";
-      var possible = "abcdefghijklmnopqrstuvwxyz";
-      for( var i = 0; i < 3; i++ ) {
-        name += possible.charAt(Math.floor(Math.random() * possible.length));
-      }
-      return name;
-    }
-  });
+    // function makeRandomName(){
+    //   var name = "";
+    //   var possible = "abcdefghijklmnopqrstuvwxyz";
+    //   for( var i = 0; i < 3; i++ ) {
+    //     name += possible.charAt(Math.floor(Math.random() * possible.length));
+    //   }
+    //   return name;
+    // }
+
+      // 지정 namespace로 접속한다
+      var chat = io('/chat'),
+          news = io('/news');
+
+      $("#chat").submit(function(e) {
+        e.preventDefault();
+
+        // 서버로 자신의 정보를 전송한다.
+        chat.emit("chat message", {
+          name: $("#name").val(),
+          room: $("#room").val(),
+          msg: $("#msg").val()
+        });
+      });
+
+      // 서버로부터의 메시지가 수신되면
+      chat.on("chat message", function(data) {
+        $("#chat").append($('<li>').text(data));
+      }); 
 });
 </script>
 </body>
