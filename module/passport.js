@@ -27,7 +27,8 @@ module.exports = function(passport) {
         var query = `SELECT /* ?.loginprocess */
                             user_id,
                             password,
-                            salt_pass
+                            salt_pass,
+                            user_idx
                             
                         FROM tb_user
                         WHERE user_id = ? `;
@@ -36,15 +37,17 @@ module.exports = function(passport) {
         if(rows.length == 0){
             return done(null, false, req.flash('loginMessage', '아이디 또는 비밀번호가 틀렸습니다.'));
         }else{
-            let pass = rows[0].password;  // DB 해쉬값 참조
-            let salt = rows[0].salt_pass;  // DB 솔트값 참조
+            let pass = rows[0].password;  
+            let salt = rows[0].salt_pass;  
+            let user_idx = rows[0].user_idx;
             let userHashPass = crypto.createHash("sha512").update(password+salt).digest("hex"); // 사용자 패스워드 + DB 솔트값
 
             if(pass === userHashPass){
                 console.log('성공!');
 
                 let userInfo = {
-                    'userid' : userid
+                    'userid' : userid,
+                    'user_idx' : user_idx
                 };
                 return done(null, userInfo);
             }else{
@@ -85,7 +88,7 @@ module.exports = function(passport) {
             let inresult = await DB.Sql( sql, [ module_path, userid, hashpass, salt, userrealnameField  ]);
             if(inresult.affectedRows == 1){
                 var userInfo = {
-                    'userid' : userid,
+                    'userid' : userid
                 };
 
                 return done(null, userInfo)
