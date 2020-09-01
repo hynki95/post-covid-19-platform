@@ -4,7 +4,17 @@
   <% include ./include/meta.ejs %>
   <% include ./include/common.ejs %>
   <style>
-  
+    .jsgrid-grid-header {
+    background: #0a9a2a;
+    }
+    .jsgrid-header-row>.jsgrid-header-cell {
+    color: white;
+    background: #0a9a2a;
+    }
+    .jsgrid-cell{
+      border-color: #87ca96;
+    }
+    
     @media (max-width:500px){.small-box h3{font-size:1.5rem} ol{padding-inline-start: 20px;font-size:13px;}}
     @media (max-width:400px){#subscription_list li{padding-bottom:20px;}}
     @media (max-width:350px){.small-box h3{font-size:1.1rem}}
@@ -29,51 +39,19 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-
-        <!-- <div class="row" id="charge_menu">
-          <div class="container">
-            <h3>Socket.io Chat Example</h3>
-            <form class="form-inline">
-              <div class="form-group">
-                <label for="msgForm">Message: </label>
-                <input type="text" class="form-control" id="msgForm">
-              </div>
-              <button type="submit" class="btn btn-primary">Send</button>
-            </form>
-            <div id="chatLogs"></div>
+        <div class="row">
+          <h3>채팅방 만들기</h3>
+          <input class="greeninput" id="makeroom_name" placeholder="채팅방 이름을 입력하세요"/>
+          <div class="col-md-12">
+            <br>
+            <button class="buttonyellow" id="makeroom" style="color: black;">채팅방 만들기</div>
           </div>
-        </div> -->
-
-        <div class="row" id="charge_menu">
-          <div class="container">
-            <h3>Socket.io Chat Example</h3>
-            <!-- <form class="form-inline"> -->
-            <form class="form-horizontal" id="chat">
-              <div class="form-group">
-                <label for="name" class="col-sm-2 control-label">Name</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="name" name="name" value="<%=userid%>" placeholder="Name" readonly>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="room" class="col-sm-2 control-label">Room</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="room" name="room" placeholder="Room">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="msg" class="col-sm-2 control-label">Message</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="msg" name="msg" placeholder="Message">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn btn-default">Send</button>
-                </div>
-              </div>
-            </form>
-            <ul id="chat"></ul>
+        </div>
+        <br>
+        <h3>채팅리스트</h3>
+        <div class="row">
+          <div class="col-md-12">
+            <div id="chatlist" style="color: black;"></div>
           </div>
         </div>
       </div>
@@ -95,84 +73,57 @@
 
 <script>
 $(document).ready(function(){
-    // // socket.io 서버에 접속한다
-    // // var socket = io();
-    // // 지정 namespace로 접속한다
-    // var socket = io('/my-namespace');
-
-    // // 서버로 자신의 정보를 전송한다.
-    // socket.emit("login", {
-    //   // name: "ungmo2",
-    //   name: makeRandomName(),
-    //   userid: "ungmo2@gmail.com"
-    // });
-
-    // // 서버로부터의 메시지가 수신되면
-    // socket.on("login", function(data) {
-    //   $("#chatLogs").append("<div><strong>" + data + "</strong> has joined</div>");
-    // });
-
-    // // 서버로부터의 메시지가 수신되면
-    // socket.on("chat", function(data) {
-    //   console.log(data);
-    //   $("#chatLogs").append("<div>" + data.msg + " : from <strong>" + data.from.name + "</strong></div>");
-    // });
-
-    // // Send 버튼이 클릭되면
-    // $("form").submit(function(e) {
-    //   e.preventDefault();
-    //   var $msgForm = $("#msgForm");
-
-    //   // 서버로 메시지를 전송한다.
-    //   socket.emit("chat", { msg: $msgForm.val() });
-    //   $msgForm.val("");
-    // });
-
-    // function makeRandomName(){
-    //   var name = "";
-    //   var possible = "abcdefghijklmnopqrstuvwxyz";
-    //   for( var i = 0; i < 3; i++ ) {
-    //     name += possible.charAt(Math.floor(Math.random() * possible.length));
-    //   }
-    //   return name;
-    // }
-
-      // 지정 namespace로 접속한다
-      var chat = io('/chat'),
-          news = io('/news');
-
-      $("#chat").submit(function(e) {
-        e.preventDefault();
-
-        // 서버로 자신의 정보를 전송한다.
-        chat.emit("chat message", {
-          name: $("#name").val(),
-          room: $("#room").val(),
-          msg: $("#msg").val()
-        });
-
-        $.ajax({
-          type: "POST",
-          url : 'chat/savechat',
-          data: {
-            name: $("#name").val(),
-            room: $("#room").val(),
-            msg: $("#msg").val()          },
-          success: function(r){
-            if(r.status == true){
-              alert("Success")
-            }else{
-              alert("fail")
-            }
+  $("#makeroom").click(()=>{
+    $.ajax({
+      type : "POST",
+      url : 'chat/savechat',
+      data : {
+        room : $("#makeroom_name").val(),
+        msg : "채팅방이 생성되었습니다."
+      },
+        success: function(r){
+          if(r.status == true){
+            alert("방이 생성되었습니다.")
+            $("#chatlist").jsGrid("loadData");
+          }else{
+            alert("실패하였습니다.")
           }
-        })
-      });
+        }
+    })
+  });
 
-      // 서버로부터의 메시지가 수신되면
-      chat.on("chat message", function(data) {
-        $("#chat").append($('<li>').text(data));
-      }); 
+  $("#chatlist").jsGrid({
+      height: "auto",
+      width: "100%",
+
+      sorting: true,
+      paging: true,
+      autoload: true,
+      pageLoading: true,
+
+      controller: {
+          loadData: function(filter) {
+              return $.ajax({
+                  type: "POST",
+                  url: `chat/getlist`,
+                  data: filter
+              });
+              console.log(filter)
+          }
+      },
+      fields: [
+          { name: 'room', type: 'text', title:'방이름', align:'center', width:5 }
+      ],
+      rowClick:function(args){
+        console.log(args)
+          sendurl(args.item.room);
+      }
+  });
 });
+
+function sendurl(room){
+        location.href = "/chatting_room?room=" + room;
+};
 </script>
 </body>
 </html>

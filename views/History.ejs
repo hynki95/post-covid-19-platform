@@ -75,8 +75,6 @@
                 paging: true,
                 autoload: true,
                 pageLoading: true,
-                pageIndex: 1,
-                pageSize: 15,
         
                 controller: {
                     loadData: function(filter) {
@@ -99,7 +97,7 @@
                     { name: 'send_type', type: 'text', title:'type', align:'center', width:100 }    
                 ],
                 rowClick:function(args){
-                    setformdata(args);
+                    sendurl(args.item.tech_idx);
                 }
             });
 
