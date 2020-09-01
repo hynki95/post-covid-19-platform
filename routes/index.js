@@ -21,6 +21,10 @@ router.get('/chatting', async function(req, res, next) {
   res.render('chatting', { title: 'Chatting'});
 });
 
+router.get('/jh', async function(req, res, next) {
+  res.render('jh', { title: 'jh'});
+});
+
 router.get('/chargeUZPAY', JSONResponse.isLoggedin, async function(req, res, next) {
   let userid = req.user.userid;
   let sql = 'SELECT /* ?.getBalanceofKpay */ K_pay, UZ_pay FROM tb_user WHERE user_id = ? ';
