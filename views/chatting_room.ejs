@@ -100,7 +100,6 @@ $(document).ready(function(){
           news = io('/news');
 
       $("#chatting").click(()=>{
-        alert("!")
         // 서버로 자신의 정보를 전송한다.
         chat.emit("chat message", {
           name: "<%=userid%>",
@@ -128,7 +127,8 @@ $(document).ready(function(){
 
       // 서버로부터의 메시지가 수신되면
       chat.on("chat message", function(data) {
-        $("#chat").append($('<li>').text(data));
+        console.log("data",data)
+        $("#chat").append($('<li>').text("<%=userid%>"+":"+data));
       });
 
 });
