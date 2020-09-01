@@ -17,8 +17,9 @@ router.get('/', JSONResponse.isLoggedin, async function(req, res, next) {
   res.render('index', { title: '제목'} );
 });
 
-router.get('/chatting', async function(req, res, next) {
-  res.render('chatting', { title: 'Chatting'});
+router.get('/chatting', JSONResponse.isLoggedin, async function(req, res, next) {
+  let userid = req.user.userid;
+  res.render('chatting', { title: 'Chatting', userid: userid});
 });
 
 router.get('/jh', async function(req, res, next) {

@@ -29,6 +29,8 @@ var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var chargeRouter = require('./routes/charge');
 var sendRouter = require('./routes/send');
+var chattingRouter = require('./routes/chat');
+
 
 
 var app = express();
@@ -77,6 +79,7 @@ app.use('/', indexRouter);
 app.use('/', loginRouter);
 app.use('/charge', chargeRouter);
 app.use('/send', sendRouter);
+app.use('/chat', chattingRouter);
 
 
 // catch 404 and forward to error handler
