@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ./include/meta.ejs %>
+  <% include ./include/common.ejs %>
+  <style>
+    body{
+      color:black;
+    }
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+        width : 100px;
+        height: 40px;
+    }
+    th, td {
+        padding: 20px;
+    }
+    th {
+        text-align: center;
+    }
+    </style>
+    
+    
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+    <% include ./include/sidebar.ejs %>
+    <div class="container-fulid">
+        <table style="width:100%">
+          <tr>
+            <th> </th>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+            <th>목</th>
+            <th>금</th>
+            <th>토</th>
+            <th>일</th>
+          </tr>
+            <tr>
+            <th>9</th>
+            <td name="mon-9" id="mon-9" style="background : rgb(209, 214, 255);">학교온라인 수업</td>
+            <td name="tue-9" id="tue-9">학교온라인 수업</td>
+            <td name="wed-9" id="wed-9">학교온라인 수업</td>
+            <td name="thu-9" id="thu-9">학교온라인 수업</td>
+            <td name="fri-9" id="fri-9">학교온라인 수업</td>
+            <td name="sat-9" id="sat-9"></td>
+            <td name="sun-9" id="sun-9"></td>
+          </tr>
+            <tr>
+            <th>10</th>
+            <td name="mon-10" id="mon-10"> </td>
+            <td name="tue-10" id="tue-10"> </td>
+            <td name="wed-10" id="wed-10"> </td>
+            <td name="thu-10" id="thu-10"> </td>
+            <td name="fri-10" id="fri-10"> </td>
+            <td name="sat-10" id="sat-10"> </td>
+            <td name="sun-10" id="sun-10"> </td>
+          </tr>
+            <tr>
+            <th>11</th>
+            <td name="mon-11" id="mon-11"> </td>
+            <td name="tue-11" id="tue-11"> </td>
+            <td name="wed-11" id="wed-11"> </td>
+            <td name="thu-11" id="thu-11"> </td>
+            <td name="fri-11" id="fri-11"> </td>
+            <td name="sat-11" id="sat-11"> </td>
+            <td name="sun-11" id="sun-11"> </td>
+          </tr>
+          <tr>
+            <th>12</th>
+            <td name="mon-12" id="mon-12"> </td>
+            <td name="tue-12" id="tue-12"> </td>
+            <td name="wed-12" id="wed-12"> </td>
+            <td name="thu-12" id="thu-12"> </td>
+            <td name="fri-12" id="fri-12"> </td>
+            <td name="sat-12" id="sat-12"> </td>
+            <td name="sun-12" id="sun-12"> </td>
+          </tr>
+          <tr>
+            <th>13</th>
+            <td name="mon-13" id="mon-13"> </td>
+            <td name="tue-13" id="tue-13"> </td>
+            <td name="wed-13" id="wed-13"> </td>
+            <td name="thu-13" id="thu-13" style = "background : rgb(251, 230, 244);">수학학원</td>
+            <td name="fri-13" id="fri-13"> </td>
+            <td name="sat-13" id="sat-13"> </td>
+            <td name="sun-13" id="sun-13"> </td>
+          </tr>
+          <tr>
+            <th>14</th>
+            <td name="mon-14" id="mon-14"> </td>
+            <td name="tue-14" id="tue-14" style = "background : rgb(251, 230, 244);">수학학원</td>
+            <td name="wed-14" id="wed-14"> </td>
+            <td name="thu-14" id="thu-14"> </td>
+            <td name="fri-14" id="fri-14"> </td>
+            <td name="sat-14" id="sat-14"> </td>
+            <td name="sun-14" id="sun-14"> </td>
+          </tr>
+          <tr>
+            <th>15</th>
+            <td name="mon-15" id="mon-15"> </td>
+            <td name="tue-15" id="tue-15" style = "background : rgb(251, 230, 244);">영어학원</td>
+            <td name="wed-15" id="wed-15"> </td>
+            <td name="thu-15" id="thu-15"> </td>
+            <td name="fri-15" id="fri-15"> </td>
+            <td name="sat-15" id="sat-15"> </td>
+            <td name="sun-15" id="sun-15"> </td>
+          </tr>
+          <tr>
+            <th>16</th>
+            <td name="mon-16" id="mon-16" style = "background : rgb(251, 230, 244);">영어학원</td>
+            <td name="tue-16" id="tue-16"> </td>
+            <td name="wed-16" id="wed-16"> </td>
+            <td name="thu-16" id="thu-16"> </td>
+            <td name="fri-16" id="fri-16"> </td>
+            <td name="sat-16" id="sat-16"> </td>
+            <td name="sun-16" id="sun-16"> </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="container-fulid">
+        <div class="row">
+          <div class="col-md-12" style="border: 1px solid rgb(252, 255, 141); margin-top: 5%; background-color: rgb(252, 255, 141); border-radius: 5%;">
+            <h2 style="
+            text-align: center;
+            font-size: 1.5rem;
+            padding: 1.5% 0%;">친구추가</h2>
+            <img src="https://img.icons8.com/metro/26/000000/add-user-male.png" 
+            style="position: absolute;
+            bottom: 28%;
+            margin-left: 86%;" name="add-friend" id="add-friend" />
+          </div>
+          <div class="col-md-12" name="friends" id="friends" style="padding: 3%;">
+            <ul>
+              <li>홍길동</li>
+              <li>홍길순</li>
+              <li>서주영</li>
+              <li>김수림</li>
+            </ul>
+          </div>
+          <div class="col-md-12" 
+          style="border: 1px solid rgb(254, 255, 198);
+          background-color: rgb(254, 255, 198);
+          border-radius: 5%;
+          padding: 1%;">
+            아이콘 추가할 예정  
+          </div>
+        </div>
+      </div>
+    </div>
+          
+<% include ./include/script.ejs %>
+</body>
+</html>

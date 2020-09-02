@@ -29,8 +29,12 @@ router.get('/chatting', JSONResponse.isLoggedin, async function(req, res, next) 
   res.render('chatting', { title: 'Chatting', userid: userid});
 });
 
-router.get('/jh', async function(req, res, next) {
-  res.render('jh', { title: 'jh'});
+router.get('/map', async function(req, res, next) {
+  res.render('map', { title: 'map'});
+});
+
+router.get('/schedule', async function(req, res, next) {
+  res.render('schedule', { title: 'schedule'});
 });
 
 router.get('/chargeUZPAY', JSONResponse.isLoggedin, async function(req, res, next) {
