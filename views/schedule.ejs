@@ -156,4 +156,25 @@
           
 <% include ./include/script.ejs %>
 </body>
+
+<script>
+  $("#add_friend_btn").click(()=>{
+    $.ajax({
+      type : "POST",
+      url : 'chat/addfriend',
+      data : {
+        userid : $("#add_friend").val()
+      },
+        success: function(r){
+          if(r.status == true){
+            alert("친구가 추가되었습니다.")
+          }else{
+            alert("실패하였습니다.")
+          }
+        }
+    })
+  });
+
+  
+</script>
 </html>

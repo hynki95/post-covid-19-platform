@@ -45,16 +45,16 @@
           <div class="col-md-12">
             <br>
             <button class="buttonyellow" id="makeroom" style="color: black;">채팅방 만들기</div>
-          </div>
-        </div>
-        <br>
-        <h3>채팅리스트</h3>
-        <div class="row">
-          <div class="col-md-12">
-            <div id="chatlist" style="color: black;"></div>
-          </div>
         </div>
       </div>
+        <br>
+        <h3>채팅리스트</h3>
+      <div class="row">
+        <div class="col-md-12">
+          <div id="chatlist" style="color: black;"></div>
+        </div>
+      </div>
+    </div>
       <!-- /.card-body -->
     </section>
     <!-- /.content -->
@@ -73,10 +73,12 @@
 
 <script>
 $(document).ready(function(){
+
+
   $("#makeroom").click(()=>{
     $.ajax({
       type : "POST",
-      url : 'chat/savechat',
+      url : 'chat/addfriend',
       data : {
         room : $("#makeroom_name").val(),
         msg : "채팅방이 생성되었습니다."
