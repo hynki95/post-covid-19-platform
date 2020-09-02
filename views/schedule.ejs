@@ -3,9 +3,22 @@
 <head>
   <% include ./include/meta.ejs %>
   <% include ./include/common.ejs %>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <style>
     body{
       color:black;
+    }
+    .schedule-bar h1{
+      text-align: left;
+      font-weight: bold;
+    }
+    .schedule-bar img{
+      position: absolute;
+      bottom: 13%;
+      margin-left: 89%;
     }
     table, th, td {
         border: 1px solid black;
@@ -20,6 +33,61 @@
     th {
         text-align: center;
     }
+    .add-friend-bar{
+      border: 1px solid rgb(252, 255, 141);
+      margin-top: 5%; 
+      background-color: rgb(252, 255, 141); 
+      border-radius: 5%;
+    }
+    .add-friend-bar h2{
+      text-align: center;
+      font-size: 1.5rem;
+      padding: 1.5% 0%;
+    }
+    .add-friend-bar img{
+      position: absolute;
+      bottom: 28%;
+      margin-left: 86%;
+    }
+    .footer{
+      border: 1px solid rgb(254, 255, 198);
+      background-color: rgb(254, 255, 198);
+      border-radius: 5%;
+      padding: 1%;
+    }
+    .footer img{
+      display: initial;
+      margin: 0% 5%;
+    }
+
+    .dropDown {position:relative; display:inline-block; *display:inline; *zoom:1;}
+    .btn_drop {background:#767676; color:#fff; padding:5px 10px; border-radius:5px;}
+    .dropBox {position:absolute; z-index:1; height:0; overflow:hidden; width:150px;}
+    .dropBox.on {height:auto; padding:10px 0; border:1px solid #ddd; background:#fff;}
+    .dropBox ul li:hover,
+    .dropBox ul li.on {background:#eee;}
+    .btn_close {display:block; height:0; overflow:hidden;}
+    .name p{
+      color:black;
+    }
+    .sche-time p{
+      color:black;
+    }
+    .week{
+      margin: 5% 0%;
+    }
+    .sche-delete-btn button{
+      width: 100%;
+      margin-top: 23%;
+    }
+    .sche-save-btn button{
+      width: 100%;
+      margin-top: 23%;
+    }
+    #opener{
+      background: white;
+      border: 0px;
+}
     </style>
     
     
@@ -28,6 +96,50 @@
   <div class="wrapper">
     <% include ./include/sidebar.ejs %>
     <div class="container-fulid">
+      <div class="col-md-12 schedule-bar">
+        <h1>시간표</h1>
+        <button id="opener"><img src="./dist/img/add-schedule.png"/></button>
+      </div>
+
+      <div id="dialog" title="수업 추가">
+        <div class="col-md-12 text-left name">
+          <p>수업명: <input type="수업명"/></p>
+          <p>교수명: <input type="수업명"/></p>
+          <p>장소: <input type="수업명"/></p>
+        </div>
+        <div class="col-md-6 week">
+          <div class="dropDown">
+            <a class="btn_drop">요일</a>
+              <div class="dropBox">
+                  <ul>
+                      <li><a>월요일</a></li>
+                      <li><a>화요일</a></li>
+                      <li><a>수요일</a></li>
+                      <li><a>목요일</a></li>
+                      <li><a>금요일</a></li>
+                      <li><a>토요일</a></li>
+                      <li><a>일요일</a></li>
+
+                  </ul>
+                  <a class="btn_close">닫기</a>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-12 sche-time">
+          <p>시간 : </p>
+          <input type='time'/>
+        </div>
+        <div class="row">
+          <div class="col-md-6 text-center sche-delete-btn">
+            <button>삭제</button>
+          </div>
+          <div class="col-md-6 text-center sche-save-btn">
+            <button>추가</button>
+          </div>
+        </div>
+      </div>
+       
+      
         <table style="width:100%">
           <tr>
             <th> </th>
@@ -125,15 +237,9 @@
     <div class="wrapper">
       <div class="container-fulid">
         <div class="row">
-          <div class="col-md-12" style="border: 1px solid rgb(252, 255, 141); margin-top: 5%; background-color: rgb(252, 255, 141); border-radius: 5%;">
-            <h2 style="
-            text-align: center;
-            font-size: 1.5rem;
-            padding: 1.5% 0%;">친구추가</h2>
-            <img src="https://img.icons8.com/metro/26/000000/add-user-male.png" 
-            style="position: absolute;
-            bottom: 28%;
-            margin-left: 86%;" name="add-friend" id="add-friend" />
+          <div class="col-md-12 add-friend-bar">
+            <h2>친구추가</h2>
+            <img src="./dist/img/add-friend.png" name="add-friend" id="add-friend"/>
           </div>
           <div class="col-md-12" name="friends" id="friends" style="padding: 3%;">
             <ul>
@@ -143,17 +249,105 @@
               <li>김수림</li>
             </ul>
           </div>
-          <div class="col-md-12" 
-          style="border: 1px solid rgb(254, 255, 198);
-          background-color: rgb(254, 255, 198);
-          border-radius: 5%;
-          padding: 1%;">
-            아이콘 추가할 예정  
-          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 footer">
         </div>
       </div>
     </div>
+  </div>
           
 <% include ./include/script.ejs %>
 </body>
+<script>
+  $( function() {
+    $( "#dialog" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "",
+        duration: 500
+      }
+    });
+ 
+    $( "#opener" ).on( "click", function() {
+      $( "#dialog" ).dialog( "open" );
+      });
+    } );
+
+    $( ".btn_drop" ).click(function() {
+      $(this).next().toggleClass("on");
+      return false;
+    });
+    $( ".btn_save,.btn_close,.btn_close_check" ).click(function() {
+        $(this).parent().removeClass("on");
+        return false;
+    });
+    $( ".dropBox ul li a" ).click(function() {
+        $(this).parent().parent().parent().removeClass("on").prev(".btn_drop").text($(this).text());
+        return false;
+    });
+    $(".dropBox ul li.check_all label").click(function() {
+      if($(this).children("input").is(":checked")) {
+            $(this).parent().siblings("li").addClass("on").find("input").prop("checked", true);
+        }
+        else {
+          $(this).parent().siblings("li").removeClass("on").find("input[type=checkbox]").prop("checked", false);
+      }
+    });
+  $( ".btn_save,.btn_close_check" ).click(function() {
+      if($(this).siblings("ul").find("li.check_all").children().children("input").is(":checked")) {
+          $(this).parent().prev(".btn_drop").text("All");
+      }
+      else {
+          var input_checked = $(this).siblings("ul").find("input:checked");
+          if((input_checked.size()) > 1){
+              $(this).parent().prev(".btn_drop").text(input_checked.first().parent().text()+" 외"+(input_checked.size()-1));
+          }
+          else if(($(this).siblings("ul").find("input:checked").size()) == 1){
+              $(this).parent().prev(".btn_drop").text(input_checked.first().parent().text());
+          }
+          else {
+              $(this).parent().prev(".btn_drop").text("Select(Checkbox)");
+          }
+      }
+      return false;
+  });
+
+
+
+
+   //팝업창 반응형
+    $(window).resize(function () {
+        fluidDialog();
+        $("#dialog").dialog("option", "position", {my: "center", at: "center", of: window});
+    });
+
+    function fluidDialog() {
+        var $visible = $(".ui-dialog:visible");
+        // each open dialog
+        $visible.each(function () {
+            var $this = $(this);
+            var dialog = $this.find(".ui-dialog-content").data("ui-dialog");
+            // if fluid option == true
+            if (dialog.options.fluid) {
+                var wWidth = $(window).width();
+                // check window width against dialog width
+                if (wWidth < (parseInt(dialog.options.maxWidth) + 50))  {
+                    // keep dialog from filling entire screen
+                    $this.css("max-width", "90%");
+                } else {
+                    // fix maxWidth bug
+                    $this.css("max-width", dialog.options.maxWidth + "px");
+                }
+                //reposition dialog
+                dialog.option("position", dialog.options.position);
+            }
+        });
+
+    }
+  </script>
 </html>
