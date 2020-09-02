@@ -193,11 +193,11 @@
           </tr>
           <tr>
             <th>13</th>
-            <td name="mon-13" id="mon-13"> </td>
+            <td name="mon-13" id="mon-13"><input value="N"/></td>
             <td name="tue-13" id="tue-13"> </td>
             <td name="wed-13" id="wed-13"> </td>
             <td name="thu-13" id="thu-13" style = "background : rgb(251, 230, 244);">수학학원</td>
-            <td name="fri-13" id="fri-13"> </td>
+            <td name="fri-13" id="fri-13">  </td>
             <td name="sat-13" id="sat-13"> </td>
             <td name="sun-13" id="sun-13"> </td>
           </tr>
@@ -350,4 +350,34 @@
 
     }
   </script>
+</html>
+
+<script>
+  if($("#mon-13").text()==""){
+    alert("!")
+    $("#mon-13").css("background : rgb(251, 230, 244);")
+  }else if(!$("#tue-13").text()){
+    $("#tue-13").css("background : rgb(251, 230, 244);")
+  }
+
+
+  $("#add_friend_btn").click(()=>{
+    $.ajax({
+      type : "POST",
+      url : 'chat/addfriend',
+      data : {
+        userid : $("#add_friend").val()
+      },
+        success: function(r){
+          if(r.status == true){
+            alert("친구가 추가되었습니다.")
+          }else{
+            alert("실패하였습니다.")
+          }
+        }
+    })
+  });
+
+  
+</script>
 </html>

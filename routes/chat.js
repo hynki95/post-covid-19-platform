@@ -26,6 +26,27 @@ router.post('/savechat', JSONResponse.isLoggedin, async function(req, res) {
     };
   });
 
+  router.post('/savechat_add', JSONResponse.isLoggedin, async function(req, res) {
+    let rb = req.body;
+    let room = rb.room;
+    let msg = rb.msg;
+    let userid = rb.userid;
+    let user_idx = req.user.user_idx;
+    var sendData = {};
+    var sql = `INSERT INTO chatting
+    (room, messege, user_idx, reg_id, reg_time)
+    VALUES(?, ?, ?, ?, current_timestamp);
+    `;
+    console.log(room,msg)
+    let savechat = await DB.Sql( sql, [room, msg, user_idx, userid ]);
+    console.log(savechat)
+    if(savechat.affectedRows==1){
+        res.send({data : sendData, status : true});
+    }else{
+        res.send({data : sendData, status : false});
+    };
+  });
+
   /* POST */
 router.post('/getlist', JSONResponse.isLoggedin, async function(req, res, next) {
     let query = `
@@ -55,6 +76,25 @@ router.post('/getlist', JSONResponse.isLoggedin, async function(req, res, next) 
     }else{
         res.send({status : false});
     }
+  });
+
+  router.post('/addfriend', JSONResponse.isLoggedin, async function(req, res) {
+    let rb = req.body;
+    let userid = rb.userid;
+    let userid_now = req.user.userid;
+    let user_idx = req.user.user_idx;
+    var sendData = {};
+    var sql = `INSERT INTO friend
+    (user_idx, user_id, reg_id, reg_time)
+    VALUES(?, ?, ?, current_timestamp);
+    `;
+    let addfriend = await DB.Sql( sql, [user_idx, userid, userid_now, userid_now ]);
+    console.log(addfriend)
+    if(addfriend.affectedRows==1){
+        res.send({data : sendData, status : true});
+    }else{
+        res.send({data : sendData, status : false});
+    };
   });
 
   module.exports = router;

@@ -50,7 +50,12 @@
               </div>
               <div class="form-group">
                 <div class="col-sm-10" style="text-align:center">
-                    <button style="width:50%" class="row" id="chatting" type="button" class="btn-default">Send</button>
+                    <button style="width:50%" class="row" id="chatting" type="button" class="btn-default">전송</button>
+                </div>
+                <br>
+                <div class="col-sm-10" style="text-align:center">
+                  <input type="text" class="form-control" id="userid" name="userid" placeholder="아이디입력">
+                  <button style="width:50%" class="row" id="savechat_add" type="button" class="btn-default">친구추가</button>
                 </div>
               </div>
             </form>
@@ -74,25 +79,7 @@
 
 <script>
 $(document).ready(function(){
-    $.ajax({
-        type: "POST",
-        url : 'chat/loadchat',
-        data : {
-            room: "<%=room%>"
-        },
-        success: function(r){
-            if(r.status == true){
-                console.log(r.data)
-                console.log(r.data.length)
-
-                for(i=0;i<r.data.length;i++){
-                    $("#chat").append($('<li>').text(r.data[i].user_id+":"+r.data[i].messege));
-                }
-            }else{
-              alert("fail")
-            }
-          }
-    })
+    
    
     
       // 지정 namespace로 접속한다
@@ -131,7 +118,50 @@ $(document).ready(function(){
         $("#chat").append($('<li>').text("<%=userid%>"+":"+data));
       });
 
+      $("#savechat_add").click(()=>{
+        $.ajax({
+          type : "POST",
+          url : 'chat/savechat_add',
+          data: {
+            userid: $("#userid").val(),
+            room: "<%=room%>",
+            msg: "채팅방에 들어왔습니다."
+          },
+            success: function(r){
+              if(r.status == true){
+                $("#chat").append($('<li>').text($("#userid").val()+":"+"채팅방에 들어왔습니다."));
+                alert("친구가 추가되었습니다.")
+              }else{
+                alert("실패하였습니다.")
+              }
+            }
+        })
+      });
+      reload()
 });
+
+
+function reload(){
+  $.ajax({
+        type: "POST",
+        url : 'chat/loadchat',
+        data : {
+            room: "<%=room%>"
+        },
+        success: function(r){
+            if(r.status == true){
+                console.log(r.data)
+                console.log(r.data.length)
+
+                for(i=0;i<r.data.length;i++){
+                    $("#chat").append($('<li>').text(r.data[i].user_id+":"+r.data[i].messege));
+                }
+            }else{
+              alert("fail")
+            }
+          }
+    })
+}
 
 </script>
 </body>
