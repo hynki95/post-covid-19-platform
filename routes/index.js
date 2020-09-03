@@ -14,7 +14,7 @@ router.get('/', JSONResponse.isLoggedin, async function(req, res, next) {
   let basic = await DB.Sql( sql, [ module_path, userid])
 
   console.log("sql : " + sql);
-  res.render('index', { title: '제목'} );
+  res.render('index', { title: '환영합니다❤'} );
 });
 
 router.get('/chatting_room', JSONResponse.isLoggedin, async function(req, res, next) {
