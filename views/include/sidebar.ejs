@@ -3,21 +3,26 @@
     .ribbon-wrapper .ribbon {
         display: none;}
     .navbar-white{
-        background-color:black;
+        background-color:rgb(255, 212, 31);
     }
     .os-content{
-        background-color: black;
+        background-color: rgb(253, 244, 205);
     }
     .fa-bars:before{
-        color: white;
+        color: black;
         position: absolute;
         top:3%;
     }
     .main-header{
-        border-bottom:1px solid #4b545c;
+        border-bottom:1px solid rgb(255, 212, 31);
     }
-    i2 {
-        padding-left: 20px
+    i {
+        padding-left: 20px;
+        color:black;
+    }
+    .nav-item a p{
+        color: black;
+        padding-left: 8%;
     }
     </style>
 </head>
@@ -35,9 +40,12 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="overflow-x:hidden;">
     <!-- Brand Logo -->
     <a href="/" class="brand-link navbar-white" style="padding:1.5rem">
-    <span class="brand-text font-weight-light pl-3" style="color:white;padding-left: 4rem!important;font-size:147%;">
-        아름달
-    </span>
+    <div>
+        <img src="./dist/img/logo_black.png" alt="logo" style="width: 3rem ; height: 3rem;">
+        <span class="brand-text font-weight-light pl-3" style="color:black;font-size:147%;">
+            아름달
+        </span>
+    </div>  
     <div class="ribbon-wrapper">
         <div class="ribbon bg-primary">
         </div>
@@ -49,14 +57,6 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
-        <li class="nav-item has-treeview menu-open">
-            <a href="/" class="nav-link active">
-            <i class="fa fa-home" aria-hidden="true"></i>
-            <p>
-                메뉴
-            </p>
-            </a>
-        </li>
         <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
@@ -67,7 +67,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                <a href="/History" class="nav-link">
+                <a href="/schedule" class="nav-link">
                     <i2 class="fa fa-caret-right" aria-hidden="true"></i2>
                     <p>시간표 확인</p>
                 </a>
@@ -76,7 +76,7 @@
         </li>
         <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-                <i class="nav-icon 	fa fa-credit-card"></i>
+                <i class="nav-icon 	fas fa-comments"></i>
             <p>
                 채팅
                 <i class="fas fa-angle-left right"></i>
@@ -94,7 +94,7 @@
         </li>
         <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-                <i class="nav-icon 	fa fa-credit-card"></i>
+                <i class="nav-icon 	fas fa-map-marked-alt"></i>
             <p>
                 지도
                 <i class="fas fa-angle-left right"></i>
@@ -103,7 +103,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                <a href="/sendKPAY" class="nav-link">
+                <a href="/map" class="nav-link">
                     <i2 class="fa fa-caret-right" aria-hidden="true"></i2>
                     <p>지도 확인하기</p>
                 </a>
