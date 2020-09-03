@@ -103,13 +103,13 @@
 
       <div id="dialog" title="수업 추가">
         <div class="col-md-12 text-left name">
-          <p>수업명: <input type="수업명"/></p>
-          <p>교수명: <input type="수업명"/></p>
-          <p>장소: <input type="수업명"/></p>
+          <p>수업명: <input id="classname"/></p>
+          <p>교수명: <input id="profname"/></p>
+          <p>장소: <input id="location"/></p>
         </div>
         <div class="col-md-6 week">
           <div class="dropDown">
-            <a class="btn_drop">요일</a>
+            <a id="day" class="btn_drop">요일</a>
               <div class="dropBox">
                   <ul>
                       <li><a>월요일</a></li>
@@ -119,22 +119,21 @@
                       <li><a>금요일</a></li>
                       <li><a>토요일</a></li>
                       <li><a>일요일</a></li>
-
                   </ul>
                   <a class="btn_close">닫기</a>
-              </div>
+              </div> 
           </div>
         </div>
         <div class="col-md-12 sche-time">
           <p>시간 : </p>
-          <input type='time'/>
+          <input id="time" type='time'/>
         </div>
         <div class="row">
           <div class="col-md-6 text-center sche-delete-btn">
             <button>삭제</button>
           </div>
           <div class="col-md-6 text-center sche-save-btn">
-            <button>추가</button>
+            <button id="addtime">추가</button>
           </div>
         </div>
       </div>
@@ -260,6 +259,16 @@
 <% include ./include/script.ejs %>
 </body>
 <script>
+  $( "#addtime" ).click(function() {
+      console.log($('#classname').val(), 'gg1')
+      console.log($('#profname').val(), 'gg2')
+
+      console.log($('#day').text(), 'gg3')
+      console.log($('#time').val(), 'gg4')
+
+
+    });
+
   $( function() {
     $( "#dialog" ).dialog({
       autoOpen: false,
@@ -349,12 +358,7 @@
         });
 
     }
-  </script>
-</html>
-
-<script>
-  if($("#mon-13").text()==""){
-    alert("!")
+    if($("#mon-13").text()==""){
     $("#mon-13").css("background : rgb(251, 230, 244);")
   }else if(!$("#tue-13").text()){
     $("#tue-13").css("background : rgb(251, 230, 244);")
@@ -377,7 +381,5 @@
         }
     })
   });
-
-  
-</script>
+  </script>
 </html>

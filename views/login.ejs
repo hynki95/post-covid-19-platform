@@ -4,13 +4,18 @@
   <% include ./include/meta.ejs %>
   <% include ./include/common.ejs %>
   <style>
+  .main-title h1{
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+  }
   .login-page{
-    background: black;
+    background: rgb(253, 244, 205);
   }
   .btn-primary {
-    color: #fff;
-    background-color: #000000;
-    border-color: #000000;
+    color: #000;
+    background-color:rgb(253, 244, 205);
+    border-color:rgb(253, 244, 205);
 }
   </style>
   
@@ -18,7 +23,9 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <img src="./dist/img/logo.png" style="color: white;">
+    <div class="col-md-12 text-center main-title">
+      <h1>흥부놀부</h1>
+    </div>
   </div>
 
   <div class="card">
@@ -44,7 +51,7 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block" style="background: rgb(255, 212, 31);">Sign In</button>
           </div>
           <div class="col-12" style="text-align:right;">
             <a href="/signup">Sign Up</a>

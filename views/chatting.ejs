@@ -4,17 +4,50 @@
   <% include ./include/meta.ejs %>
   <% include ./include/common.ejs %>
   <style>
+    h3{
+      color: black;
+    }
+    .greeninput {
+      width: 100%;
+      height: 100%;
+      font-size: 24px;
+      background-color: #001f3f;;
+      border: 2px solid #001f3f;;
+      padding-right: 23px;
+      padding-left: 23px;
+    }
+    .buttonyellow{
+      color: black;
+      width: 100%;
+      background: rgb(255, 212, 31);
+      border: 1px solid rgb(255, 212, 31);
+    }
+    .chattingroom-box{
+      border: 1px solid rgb(253, 244, 205);
+      border-radius: 1%;
+      padding: 3% 3%;
+      background: rgb(253, 244, 205);
+    }
     .jsgrid-grid-header {
-    background: #0a9a2a;
+    background:  rgb(255, 212, 31)
     }
     .jsgrid-header-row>.jsgrid-header-cell {
-    color: white;
-    background: #0a9a2a;
+    color: black;
+    background: rgb(255, 212, 31)
     }
     .jsgrid-cell{
-      border-color: #87ca96;
+      border-color: black;
     }
-    
+    .chattinglist-box{
+      border: 1px solid rgb(253, 244, 205);
+      border-radius: 1%;
+      padding: 3% 3%;
+      background: rgb(253, 244, 205);
+      margin-top: 10%;
+    }
+    .content-wrapper{
+      background: white;
+    }
     @media (max-width:500px){.small-box h3{font-size:1.5rem} ol{padding-inline-start: 20px;font-size:13px;}}
     @media (max-width:400px){#subscription_list li{padding-bottom:20px;}}
     @media (max-width:350px){.small-box h3{font-size:1.1rem}}
@@ -39,17 +72,15 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <div class="row">
+        <div class="row   chattingroom-box">
           <h3>채팅방 만들기</h3>
           <input class="greeninput" id="makeroom_name" placeholder="채팅방 이름을 입력하세요"/>
-          <div class="col-md-12">
-            <br>
-            <button class="buttonyellow" id="makeroom" style="color: black;">채팅방 만들기</div>
+          <div class="col-md-12" style="padding-left: 0px; padding-right: 0px; margin-top: 5%;">
+            <button class="buttonyellow" id="makeroom">채팅방 만들기</div>
         </div>
       </div>
-        <br>
+      <div class="row chattinglist-box">
         <h3>채팅리스트</h3>
-      <div class="row">
         <div class="col-md-12">
           <div id="chatlist" style="color: black;"></div>
         </div>

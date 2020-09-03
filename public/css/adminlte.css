@@ -11190,7 +11190,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 }
 
 .content-wrapper {
-  background: #f4f6f9;
+  background: white !important;
 }
 
 .content-wrapper > .content {
@@ -11271,10 +11271,12 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 
 .content-header {
   padding: 15px 0.5rem;
+  background: white !important;
 }
 
 .text-sm .content-header {
   padding: 10px 0.5rem;
+  background: white !important;
 }
 
 .content-header h1 {
@@ -11295,6 +11297,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 
 .text-sm .content-header .breadcrumb {
   line-height: 1.5rem;
+  background: white !important;
 }
 
 .hold-transition .content-wrapper,
@@ -13267,7 +13270,7 @@ body.text-sm .control-sidebar {
 }
 
 .navbar-white {
-  background-color: #ffffff;
+  background-color: white;
 }
 
 .navbar-gray {
