@@ -5,12 +5,18 @@
   <% include ../include/common.ejs %>
   <style>
 .login-page{
-    background: black;
+  background: rgb(253, 244, 205);
   }
   .btn-primary {
-    color: #fff;
-    background-color: #000000;
-    border-color: #000000;
+    color: #000;
+    background-color:rgb(253, 244, 205);
+    border-color:rgb(253, 244, 205);
+}
+
+.login-logo a{
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
 }
   </style>
   
@@ -18,8 +24,8 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="/" style="color: white;">
-        ALO-PAY
+    <a href="/">
+        흥부놀부
     </a>
   </div>
 
@@ -66,7 +72,7 @@
           <div class="alert alert-success" id="alert-success" >비밀번호가 일치합니다.</div> 
         <div class="row">
           <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            <button type="submit" class="btn btn-primary btn-block" style="background: rgb(255, 212, 31);">Sign Up</button>
           </div>
         </div>
       </form>
